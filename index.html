@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrindo o Telegram...</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f9fc;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 400px;
+        }
+        .loader {
+            border: 4px solid #e1e8ed;
+            border-top: 4px solid #0088cc; /* Azul do Telegram */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+        .btn-telegram {
+            display: inline-block;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,136,204,0.2);
+            transition: background 0.2s;
+            margin-top: 20px;
+        }
+        .btn-telegram:hover {
+            background-color: #006699;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="loader"></div>
+        <h2>Redirecionando para o Telegram...</h2>
+        <p>Estamos abrindo o seu aplicativo.</p>
+        
+        <!-- Botão de segurança caso o TikTok bloqueie a abertura automática -->
+        <a id="telegram-link" href="tg://resolve?domain=Allyccinha_bot" class="btn-telegram">ABRIR NO TELEGRAM</a>
+        
+        <p style="font-size: 13px; color: #7f8c8d; margin-top: 25px;">
+            Se o app não abrir sozinho, clique no botão acima ou use a opção <b>"Abrir no Navegador"</b> nos 3 pontinhos do canto superior.
+        </p>
+    </div>
+
+    <script>
+        // URLs de destino configuradas para o seu bot @Allyccinha_bot
+        const urlApp = "tg://resolve?domain=Allyccinha_bot"; // Abre direto o app instalado
+        const urlWeb = "https://t.me";        // Link padrão web se o usuário não tiver o app
+        
+        function tentarAbrirTelegram() {
+            // Força a tentativa de abertura pelo protocolo nativo do app (tg://)
+            window.location.href = urlApp;
+            
+            // Se o usuário estiver no computador ou se a trava do TikTok impedir, 
+            // redireciona para a página web do Telegram após 2 segundos
+            setTimeout(() => {
+                window.location.href = urlWeb;
+            }, 2000);
+        }
+
+        // Executa o redirecionamento assim que a página carrega
+        window.onload = tentarAbrirTelegram;
+    </script>
+
+</body>
+</html>
